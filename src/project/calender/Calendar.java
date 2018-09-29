@@ -27,14 +27,25 @@ public class Calendar {
 	
 		
 		// 입력 받기
-		int month;
+		
+		int count; // 반복 입력 횟수
 		Calendar cal = new Calendar();
-		System.out.println("달을 입력하세요.");
 		Scanner scanner = new Scanner(System.in);
-		month = scanner.nextInt();
+		
+		System.out.println("반복횟수를 입력하세요.");
+		count = scanner.nextInt();
+		
+		int[] month = new int[count];
+		
+		System.out.println("달을 입력하세요.");
+		for (int i=0; i<count; i++) {
+			month[i] = scanner.nextInt();
+		}
 		
 		// 출력 하기
-		System.out.printf("%d월은 %d일까지 있습니다.",month,cal.getEndOfMonth(month));
+		for (int j=0; j<month.length; j++) {
+			System.out.printf("%d월은 %d일까지 있습니다. \n", month[j] , cal.getEndOfMonth(month[j]));
+		}
 		scanner.close();
 	}
 
