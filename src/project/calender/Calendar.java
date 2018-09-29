@@ -24,29 +24,31 @@ public class Calendar {
 
 		
 		// 입력받은 월의 최대 일수 출력하기
-	
-		
-		// 입력 받기
-		
-		int count; // 반복 입력 횟수
+		int month; // 달 입력
+		String PROMPT = "cal>";
 		Calendar cal = new Calendar();
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("반복횟수를 입력하세요.");
-		count = scanner.nextInt();
+		month = 1;
 		
-		int[] month = new int[count];
 		
-		System.out.println("달을 입력하세요.");
-		for (int i=0; i<count; i++) {
-			month[i] = scanner.nextInt();
+		while (true) {
+			System.out.println("달을 입력하세요.(-1:종료)");
+			System.out.print(PROMPT);
+			month = scanner.nextInt();
+			if (month == -1) break;
+			
+			if (month > 12 || month < 1) {
+				System.out.println("달은 1월부터 12월까지 입력하실 수 있습니다.");
+				continue;
+			}
+			
+			System.out.printf("%d월은 %d일까지 있습니다. \n", month , cal.getEndOfMonth(month));
 		}
+		System.out.println("Have a nice day");
 		
-		// 출력 하기
-		for (int j=0; j<month.length; j++) {
-			System.out.printf("%d월은 %d일까지 있습니다. \n", month[j] , cal.getEndOfMonth(month[j]));
-		}
 		scanner.close();
+		
 	}
 
 }
