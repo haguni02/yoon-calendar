@@ -22,7 +22,7 @@ public class Calendar {
 		}
 	}
 
-	public void printCalendar(int year, int month) {
+	public void printCalendar(int year, int month, int week) {
 
 		System.out.printf("   <<%4d년%3d월>> \n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
@@ -31,12 +31,20 @@ public class Calendar {
 		boolean leapYear = isLeapYear(year);
 		int endOfMonth = getEndOfMonth(leapYear, month);
 		
+		
+		for(int j=0; j<week; j++) {
+			System.out.print("   ");
+		}
+		
 		for(int i=1; i<=endOfMonth; i++) {
+			
 			System.out.printf("%3d",i);
-			if ((i%7)==0) {
+			if((i+week)%7 == 0) {
 				System.out.println();
 			}
 		}
+		
+		
 		
 		System.out.println();
 	}
