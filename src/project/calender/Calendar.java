@@ -1,10 +1,43 @@
 package project.calender;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+
 public class Calendar {
 
 	private static final int[] END_OF_MONTH = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] LEAP_YEAR_END_OF_MONTH = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	private HashMap<Date, String> planList;
+	
+	public Calendar() {
+		planList = new HashMap<>();
+	}
 
+	public void registerPlan(String strDate, String plan) { // 일정 등록
+		try {
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			planList.put(date, plan);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public String searchPlan(String strDate) {
+		Date date;
+		String plan = "";
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			plan = planList.get(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return plan;
+	}
+	
 	public boolean isLeapYear(int year) {
 		if((year%4)==0 && ((year%100)!=0 || (year%400)==0)) {
 			return true;
