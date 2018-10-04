@@ -1,5 +1,6 @@
 package project.calender;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,15 +11,27 @@ public class Calendar {
 	private static final int[] END_OF_MONTH = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] LEAP_YEAR_END_OF_MONTH = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private HashMap<Date, String> planList;
+	private Management management;
 	
 	public Calendar() {
-		planList = new HashMap<>();
+		management = new Management();
+		
+		File file = new File("C:\\yoon\\Study\\Programming\\java_workspace\\calendar\\save.txt");
+		
+		if (file.exists()) {
+			planList = management.loadFile();
+		} else {
+			planList = new HashMap<>();
+		}
+		
+		
 	}
 
 	public void registerPlan(String strDate, String plan) { // 일정 등록
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
 			planList.put(date, plan);
+			management.saveFile(strDate, plan);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
